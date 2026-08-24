@@ -1,0 +1,25 @@
+name: Feature request
+description: Propose a focused improvement or a new agent/workload fixture.
+title: "feature: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What agent-process lifecycle question cannot be answered today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: safety
+    attributes:
+      label: Safety and false-positive considerations
+      description: Explain how this avoids targeting active or unrelated work.
+    validations:
+      required: true

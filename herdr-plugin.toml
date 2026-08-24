@@ -1,0 +1,40 @@
+id = "herdr.process-guard"
+name = "Process Guard"
+version = "0.1.3"
+min_herdr_version = "0.8.0"
+description = "Explain and safely stop dev servers left running by coding agents"
+platforms = ["macos"]
+
+[[build]]
+command = ["sh", "scripts/install.sh"]
+
+[[actions]]
+id = "audit"
+title = "Process Guard: audit agent leftovers"
+description = "Run a read-only audit of workloads attributed to Herdr coding-agent panes."
+command = ["./bin/herdr-process-guard", "scan"]
+
+[[startup]]
+command = ["./bin/herdr-process-guard", "snapshot", "--reason", "startup"]
+
+[[events]]
+on = "pane.agent_detected"
+command = ["./bin/herdr-process-guard", "snapshot", "--reason", "pane.agent_detected"]
+
+[[events]]
+on = "pane.agent_status_changed"
+command = ["./bin/herdr-process-guard", "snapshot", "--reason", "pane.agent_status_changed"]
+
+[[events]]
+on = "pane.exited"
+command = ["./bin/herdr-process-guard", "snapshot", "--reason", "pane.exited"]
+
+[[events]]
+on = "pane.closed"
+command = ["./bin/herdr-process-guard", "snapshot", "--reason", "pane.closed"]
+
+[[panes]]
+id = "dashboard"
+title = "Process Guard"
+placement = "overlay"
+command = ["./bin/herdr-process-guard", "dashboard"]

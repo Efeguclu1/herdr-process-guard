@@ -1,0 +1,57 @@
+name: Bug report
+description: Report incorrect discovery, attribution, classification, or UI behavior.
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Remove usernames, tokens, private paths, and sensitive command arguments before submitting process output.
+  - type: input
+    id: version
+    attributes:
+      label: Versions
+      description: Process Guard, Herdr, and macOS versions.
+      placeholder: Process Guard 0.1.3; Herdr 0.8.0; macOS 15.x arm64
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Discovery
+        - Agent or pane attribution
+        - Active/idle/leftover classification
+        - Stop preview or termination
+        - Dashboard
+        - Installation
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Include `scan --json` or `explain PID` output only after reviewing it for sensitive data.
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed secrets, usernames, and private paths.
+          required: true
+        - label: No process was signaled, or I have described exactly what was signaled.
+          required: true
